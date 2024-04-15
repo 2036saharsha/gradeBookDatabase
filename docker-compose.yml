@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gradeBook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - custom_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sqlspinners@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: sqlspinners
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - custom_network
+
+volumes:
+  postgres_data:
+
+networks:
+  custom_network:
