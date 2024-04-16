@@ -1,5 +1,4 @@
 import psycopg2
-from psycopg2 import sql
 
 class GradeBookTasks:
     def __init__(self, dbname, user, password, host='localhost', port=5432):
@@ -29,34 +28,61 @@ class GradeBookTasks:
             self.connection.close()
             print("Disconnected from PostgreSQL")
 
-    def execute_query(self, query, params=None):
+    def execute_query_with_result(self, query, params=None):
         try:
             cursor = self.connection.cursor()
             if params:
                 cursor.execute(query, params)
             else:
                 cursor.execute(query)
-            print("Query executed successfully")
+            result = cursor.fetchall()
+            print(result) 
         except psycopg2.Error as e:
             self.connection.rollback()  
             print("Error executing query:", e)
+            return None
+        finally:
+            cursor.close()
+
+    def execute_insert_or_create(self, query, params=None):
+        try:
+            cursor = self.connection.cursor()
+            if params:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+            print("Operation done successfully")
+        except psycopg2.Error as e:
+            self.connection.rollback()  
+            print("Error executing operation:", e)
         else:
             self.connection.commit()
             print("Transaction committed successfully")
         finally:
             cursor.close()
 
+def perform_query(task_name, postgres):
+    with open(task_name, 'r') as file:
+        commands = file.read().split(';')
+        
+    execute_func = (
+        postgres.execute_insert_or_create 
+        if "CreateTables" in task_name or "InsertValues" in task_name 
+        else postgres.execute_query_with_result
+    )
+    
+    for command in commands:
+        execute_func(command)
+
 if __name__ == "__main__":
     postgres = GradeBookTasks(dbname='gradeBook', user='postgres', password='password')
     postgres.connect()
-
-    with open('Task2(CreateTables).sql', 'r') as file:
-        commands = file.read().split(';')
-
-    with open('Task2(InsertValues).sql', 'r') as file:
-        commands = file.read().split(';')
-
-    for command in commands:
-        postgres.execute_query(command)
+    task_files = {
+        # "Task2(CreateTables).sql",
+        # "Task2(InsertValues).sql",
+        "Task4.sql",
+    }
+    for taskName in task_files:
+        perform_query(taskName, postgres)
 
     postgres.disconnect()
