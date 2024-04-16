@@ -84,7 +84,7 @@ if __name__ == "__main__":
         # "Task2(CreateTables).sql",
         # "Task2(InsertValues).sql",
         # "Task4.sql",
-        "Task5.sql",
+        "Task6.sql",
     }
     for taskName in task_files:
         perform_query(taskBaseFilePath + taskName, postgres)
