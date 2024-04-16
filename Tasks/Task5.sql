@@ -1,4 +1,3 @@
--- List all of the students in a given course: 
 SELECT
 STUDENT.F_NAME As First_Name, 
 STUDENT.L_NAME As Last_Name

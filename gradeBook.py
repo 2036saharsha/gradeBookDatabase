@@ -72,19 +72,21 @@ def perform_query(task_name, postgres):
     )
     
     for command in commands:
-        execute_func(command)
+        if command.strip():
+            execute_func(command)
 
 if __name__ == "__main__":
+    taskBaseFilePath = "Tasks/"
     postgres = GradeBookTasks(dbname='gradeBook', user='postgres', password='password')
     postgres.connect()
     task_files = {
         # "DeleteTables(CreateTables).sql",
         # "Task2(CreateTables).sql",
         # "Task2(InsertValues).sql",
-        "Task10.sql",
-        # "Task7.sql",
+        # "Task4.sql",
+        "Task5.sql",
     }
     for taskName in task_files:
-        perform_query(taskName, postgres)
+        perform_query(taskBaseFilePath + taskName, postgres)
 
     postgres.disconnect()
