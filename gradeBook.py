@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2, time
 
 class GradeBookTasks:
     def __init__(self, dbname, user, password, host='localhost', port=5432):
@@ -67,7 +67,7 @@ def perform_query(task_name, postgres):
         
     execute_func = (
         postgres.execute_insert_or_create 
-        if "CreateTables" in task_name or "InsertValues" in task_name 
+        if "CreateTables" in task_name or "InsertValues" in task_name or "UpdateValues" in task_name
         else postgres.execute_query_with_result
     )
     
@@ -78,10 +78,11 @@ if __name__ == "__main__":
     postgres = GradeBookTasks(dbname='gradeBook', user='postgres', password='password')
     postgres.connect()
     task_files = {
+        # "DeleteTables(CreateTables).sql",
         # "Task2(CreateTables).sql",
-        "Task2(InsertValues).sql",
+        # "Task2(InsertValues).sql",
+        "Task10.sql",
         # "Task7.sql",
-        # "DeleteTables(CreateTables).sql"
     }
     for taskName in task_files:
         perform_query(taskName, postgres)

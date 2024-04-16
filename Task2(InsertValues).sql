@@ -1,60 +1,56 @@
--- Insert data into COURSE
+-- Insert sample data into COURSE
 INSERT INTO COURSE (COURSE_NUM, COURSE_NAME, DEPARTMENT_NAME) VALUES
 (101, 'Introduction to Computer Science', 'Computer Science'),
-(102, 'Database Systems', 'Computer Science'),
-(103, 'Philosophy 101', 'Humanities');
+(102, 'Advanced Database Systems', 'Computer Science'),
+(103, 'Linear Algebra', 'Mathematics');
 
--- Insert data into PROFESSOR
+-- Insert sample data into PROFESSOR
 INSERT INTO PROFESSOR (PROFESSOR_ID, F_NAME, L_NAME, DEPARTMENT_NAME) VALUES
-(201, 'Alice', 'Smith', 'Computer Science'),
-(202, 'Bob', 'Johnson', 'Computer Science'),
-(203, 'Carol', 'Williams', 'Humanities');
+(1, 'John', 'Doe', 'Computer Science'),
+(2, 'Jane', 'Smith', 'Mathematics');
 
--- Insert data into STUDENT
+-- Insert sample data into STUDENT
 INSERT INTO STUDENT (STUDENT_ID, F_NAME, L_NAME, DATE_OF_BIRTH) VALUES
-(401, 'Laura', 'Adams', '2001-06-15'),
-(402, 'Mike', 'Clark', '2002-07-20'),
-(403, 'Nancy', 'Evans', '2000-05-30'),
-(404, 'Oliver', 'Hill', '1999-04-18'),
-(405, 'Patricia', 'King', '2002-02-09');
+(201, 'Alice', 'Johnson', '2001-05-14'),
+(202, 'Bob', 'Lee', '2002-11-24');
 
--- Insert data into GRADE
--- Assuming GRADE_IDs are created sequentially, you would first populate GRADEs and link them later.
+-- Insert sample data into GRADE (assuming GRADE_ID auto-increments, no direct inserts here if that's the case)
 INSERT INTO GRADE (GRADE_ID) VALUES
-(1101), (1102), (1103), (1104), (1105);
+(1),
+(2),
+(3),
+(4);
 
--- Insert data into COURSE_SCHEDULE
+-- Insert sample data into ASSIGNMENT
+INSERT INTO ASSIGNMENT (ASSIGNMENT_NUM, ASSIGNMENT_NAME, GRADE_ID, GRADE) VALUES
+(1, 'Homework 1', 1, 85),
+(2, 'Homework 2', 2, 90);
+
+-- Insert sample data into PROJECT
+INSERT INTO PROJECT (PROJECT_ID, PROJECT_NUM, PROJECT_NAME, GRADE_ID, GRADE) VALUES
+(1, 1, 'Database Project', 3, 92);
+
+-- Insert sample data into TEST
+INSERT INTO TEST (TEST_ID, TEST_NUM, TEST_NAME, GRADE_ID, GRADE) VALUES
+(1, 1, 'Midterm Exam', 4, 88);
+
+-- Insert sample data into PARTICIPATION
+INSERT INTO PARTICIPATION (PARTICIPATION_ID, PARTICIPATION_TYPE, GRADE_ID, GRADE) VALUES
+(1, 'Class Participation', 1, 95);
+
+-- Insert sample data into COURSE_SCHEDULE
 INSERT INTO COURSE_SCHEDULE (SCHEDULE_ID, COURSE_NUM, SEMESTER, PROFESSOR_ID) VALUES
-(301, 101, 'Fall 2024', 201),
-(302, 102, 'Fall 2024', 202),
-(303, 103, 'Spring 2025', 203),
-(304, 102, 'Spring 2025', 201);
+(1, 101, 'Fall 2024', 1),
+(2, 102, 'Spring 2025', 1),
+(3, 103, 'Fall 2024', 2);
 
--- Insert data into ASSIGNMENT
-INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, ASSIGNMENT_NUM, ASSIGNMENT_NAME, GRADE_ID) VALUES
-(701, 1, 'DB Design', 1101),
-(702, 2, 'Normalization', 1102);
-
--- Insert data into PROJECT
-INSERT INTO PROJECT (PROJECT_ID, PROJECT_NUM, PROJECT_NAME, GRADE_ID) VALUES
-(801, 1, 'Database Project', 1103);
-
--- Insert data into TEST
-INSERT INTO TEST (TEST_ID, TEST_NUM, TEST_NAME, GRADE_ID) VALUES
-(901, 1, 'Midterm', 1104);
-
--- Insert data into PARTICIPATION
-INSERT INTO PARTICIPATION (PARTICIPATION_ID, PARTICIPATION_TYPE, GRADE_ID) VALUES
-(1001, 'Class Participation', 1105);
-
--- Insert data into ENROLLMENT
+-- Insert sample data into ENROLLMENT
 INSERT INTO ENROLLMENT (ENROLLMENT_ID, STUDENT_ID, SCHEDULE_ID, COURSE_NUM, GRADE_ID) VALUES
-(1201, 401, 301, 101, 1101),
-(1202, 402, 302, 102, 1102),
-(1203, 403, 303, 103, 1103),
-(1204, 404, 304, 102, 1104),
-(1205, 405, 302, 102, 1105);
+(1, 201, 1, 101, 1),
+(2, 202, 2, 102, 2),
+(3, 201, 3, 103, 3),
+(4, 202, 1, 101, 4);
 
--- Insert data into GRADE_DISTRIBUTION
+-- Insert sample data into GRADE_DISTRIBUTION
 INSERT INTO GRADE_DISTRIBUTION (DISTRIBUTION_ID, COURSE_NUM, SCHEDULE_ID, NUM_HW, NUM_PROJ, NUM_TESTS, PROJECT_PERCENTAGE, PARTICIPATION_PERCENTAGE, HW_PERCENTAGE, TESTS_PERCENTAGE) VALUES
-(1301, 102, 302, 2, 1, 1, 25, 15, 30, 30);
+(1, 101, 1, 5, 1, 2, 30, 10, 40, 20);
