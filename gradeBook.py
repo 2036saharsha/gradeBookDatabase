@@ -50,8 +50,8 @@ if __name__ == "__main__":
     postgres = GradeBookTasks(dbname='gradeBook', user='postgres', password='password')
     postgres.connect()
 
-    # with open('Task2.sql', 'r') as file:
-    #     commands = file.read().split(';')
+    with open('Task2(CreateTables).sql', 'r') as file:
+        commands = file.read().split(';')
 
     with open('Task2(InsertValues).sql', 'r') as file:
         commands = file.read().split(';')
