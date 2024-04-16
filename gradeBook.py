@@ -30,51 +30,33 @@ class GradeBookTasks:
             print("Disconnected from PostgreSQL")
 
     def execute_query(self, query, params=None):
-        result = None
         try:
-            with self.connection.cursor() as cursor:
-                if params:
-                    cursor.execute(query, params)
-                else:
-                    cursor.execute(query)
-                # print("Query executed successfully")
-                result = cursor.fetchall() 
+            cursor = self.connection.cursor()
+            if params:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+            print("Query executed successfully")
         except psycopg2.Error as e:
             self.connection.rollback()  
             print("Error executing query:", e)
         else:
             self.connection.commit()
-            # print("Transaction committed successfully")
-        return result
-
-    def format_result(self, result):
-        if result:
-            formatted_results = []
-            for row in result:
-                formatted_row = ', '.join(str(value) for value in row)
-                formatted_results.append(formatted_row)
-            return formatted_results
-        else:
-            return "No results found."
-
-    def execute_queries(self, file):
-        with open(file, 'r') as f:
-            queries = f.read().split(';')
-        
-        for query in queries:
-            if query.strip():
-                result = self.execute_query(query)
-                formatted_result = self.format_result(result)
-                print("Result:", formatted_result)
+            print("Transaction committed successfully")
+        finally:
+            cursor.close()
 
 if __name__ == "__main__":
     postgres = GradeBookTasks(dbname='gradeBook', user='postgres', password='password')
     postgres.connect()
 
-    create_insert_file = 'create_insert.sql'
-    query_file = 'Task4.sql'
+    # with open('Task2.sql', 'r') as file:
+    #     commands = file.read().split(';')
 
-    # postgres.execute_queries(create_insert_file)
-    postgres.execute_queries(query_file)
+    with open('Task2(InsertValues).sql', 'r') as file:
+        commands = file.read().split(';')
+
+    for command in commands:
+        postgres.execute_query(command)
 
     postgres.disconnect()
