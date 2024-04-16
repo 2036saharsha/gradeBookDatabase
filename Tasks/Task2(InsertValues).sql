@@ -11,7 +11,7 @@ INSERT INTO PROFESSOR (PROFESSOR_ID, F_NAME, L_NAME, DEPARTMENT_NAME) VALUES
 
 -- Insert sample data into STUDENT
 INSERT INTO STUDENT (STUDENT_ID, F_NAME, L_NAME, DATE_OF_BIRTH) VALUES
-(201, 'Alice', 'Johnson', '2001-05-14'),
+(201, 'Alice', 'JohnsonQ', '2001-05-14'),
 (202, 'Bob', 'Lee', '2002-11-24');
 
 -- Insert sample data into GRADE (assuming GRADE_ID auto-increments, no direct inserts here if that's the case)

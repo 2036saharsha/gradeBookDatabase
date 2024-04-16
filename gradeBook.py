@@ -83,7 +83,7 @@ if __name__ == "__main__":
         # "DeleteTables(CreateTables).sql",
         # "Task2(CreateTables).sql",
         # "Task2(InsertValues).sql",
-        "Task4.sql",
+        "Task12.sql",
         # "Task6.sql",
     }
     for taskName in task_files:
