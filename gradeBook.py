@@ -79,8 +79,9 @@ if __name__ == "__main__":
     postgres.connect()
     task_files = {
         # "Task2(CreateTables).sql",
-        # "Task2(InsertValues).sql",
-        "Task4.sql",
+        "Task2(InsertValues).sql",
+        # "Task7.sql",
+        # "DeleteTables(CreateTables).sql"
     }
     for taskName in task_files:
         perform_query(taskName, postgres)
