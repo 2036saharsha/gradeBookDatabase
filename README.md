@@ -2,6 +2,8 @@
 
 This repository provides a Dockerized environment for running a GradeBook application with PostgreSQL as the database backend. Additionally, it includes a script (`GradeBookTasks`) for executing queries on the GradeBook database.
 
+![alt text](https://i.ibb.co/KsVBSWd/Blank-diagram.png)
+
 ## Docker Configuration
 
 The `docker-compose.yml` file defines two services:
